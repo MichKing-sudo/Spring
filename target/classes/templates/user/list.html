@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Usuarios</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+	      body {
+	          font-family: Arial, sans-serif;
+	          background: linear-gradient(to right, #56ab2f, #a8e063);
+	          height: 100vh;
+	          display: flex;
+	          justify-content: center;
+	          align-items: center;
+	      }
+	      .container {
+	          background-color: white;
+	          padding: 40px;
+	          border-radius: 10px;
+	          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	          text-align: center;
+	      }
+	      h1 {
+	          color: #56ab2f;
+	          margin-bottom: 30px;
+	      }
+	      .btn-custom {
+	          background-color: #007BFF;
+	          color: white;
+	          margin: 10px;
+	          padding: 15px 30px;
+	          border-radius: 50px;
+	          transition: background-color 0.3s ease;
+	      }
+	      .btn-custom:hover {
+	          background-color: #0056b3;
+	      }
+	  </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Lista de Usuarios</h1>
+        <div class="mb-3">
+            <a href="/users/new" class="btn btn-primary">Crear Nuevo Usuario</a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.id}"></td>
+                        <td th:text="${user.nombre}"></td>
+                        <td th:text="${user.email}"></td>
+                        <td th:text="${user.role.nombre}"></td>
+                        <td>
+                            <a th:href="@{/users/{id}/edit(id=${user.id})}" class="btn btn-sm btn-warning">Editar</a>
+                            <form th:action="@{/users/{id}/delete(id=${user.id})}" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

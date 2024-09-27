@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Proveedores</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, rgb(128, 255, 128), rgb(0, 128, 0)); /* Degradado de verde claro a verde oscuro */
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            margin-top: 20px;
+        }
+        table {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Lista de Proveedores</h2>
+        <a href="/proveedores/new" class="btn btn-primary mb-3">Nuevo Proveedor</a>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Contacto</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="proveedor : ${proveedores}">
+                    <td th:text="${proveedor.id}"></td>
+                    <td th:text="${proveedor.nombre}"></td>
+                    <td th:text="${proveedor.contacto}"></td>
+                    <td>
+                        <a th:href="@{/proveedores/{id}/edit(id=${proveedor.id})}" class="btn btn-warning">Editar</a>
+                        <form th:action="@{/proveedores/{id}/delete(id=${proveedor.id})}" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

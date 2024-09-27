@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.sportfit.demo.SportFitApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.890 s -- in com.sportfit.demo.SportFitApplicationTests
